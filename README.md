@@ -1,0 +1,1 @@
+# friolli-transparency-scraper
