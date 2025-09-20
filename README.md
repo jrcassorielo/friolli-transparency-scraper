@@ -1,101 +1,56 @@
-# Friolli Transparency Scraper
+# LexOffice AI
 
-## Objetivo do Projeto
+Plataforma inovadora para gestão completa de escritórios de advocacia. O objetivo é centralizar o relacionamento com clientes, o ciclo de vida de processos, atividades jurídicas e rotinas de backoffice em um único hub inteligente com automações e insights preditivos.
 
-Este projeto é uma ferramenta de web scraping desenvolvida para extrair dados de transparência do portal da Prefeitura de Frioli. O scraper automatiza a coleta de informações públicas como licitações, contratos, despesas e outras informações de transparência pública.
+## Principais recursos
 
-## Funcionalidades
+- **Gestão de clientes**: cadastro enriquecido com histórico e anotações.
+- **Gestão de casos**: acompanhamento por área de atuação, etapa processual e nível de risco.
+- **Tarefas com priorização inteligente**: cálculo dinâmico de prioridade que considera urgência, esforço e atrasos.
+- **Agenda de audiências**: vínculo direto com o caso para montar uma timeline unificada.
+- **Painel de insights**: recomendações automáticas sobre riscos, gargalos e oportunidades de automação.
 
-- Extração automatizada de dados de transparência
-- Login automático no portal (quando necessário)
-- Exportação dos dados em formato CSV
-- Tratamento de erros e logs detalhados
-- Interface de linha de comando
-- Geração de executável standalone
+## Arquitetura
 
-## Como Usar
+- **API**: [FastAPI](https://fastapi.tiangolo.com/) com SQLModel e SQLite.
+- **Banco de dados**: SQLite embarcado (pode ser trocado por PostgreSQL ajustando a URL em `app/database.py`).
+- **Serviço de insights**: heurísticas baseadas em prazos, riscos e automações registradas.
 
-### Instalação
+```
+app/
+├── main.py              # Ponto de entrada da API
+├── database.py          # Engine e factory de sessões
+├── models.py            # Modelos SQLModel
+├── schemas.py           # Schemas Pydantic para entrada/saída
+├── routers/             # Rotas organizadas por domínio
+└── services/insights.py # Motor de priorização e recomendações
+```
 
-1. Clone este repositório:
+## Como executar
+
+1. Instale as dependências (recomendado criar um virtualenv):
+
+   ```bash
+   pip install -e .[dev]
+   ```
+
+2. Inicie a API:
+
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+3. Acesse a documentação interativa em `http://localhost:8000/docs`.
+
+## Testes automatizados
+
 ```bash
-git clone https://github.com/jrcassorielo/friolli-transparency-scraper.git
-cd friolli-transparency-scraper
+pytest
 ```
 
-2. Instale as dependências:
-```bash
-pip install -r requirements.txt
-```
+## Próximos passos sugeridos
 
-### Execução
-
-```bash
-python scraper_friolli.py [opções]
-```
-
-#### Opções disponíveis:
-- `--output`: Nome do arquivo de saída (padrão: dados_transparencia.csv)
-- `--headless`: Executar em modo headless (sem interface gráfica)
-- `--verbose`: Modo verboso para logs detalhados
-- `--help`: Exibe ajuda e opções disponíveis
-
-#### Exemplo de uso:
-```bash
-python scraper_friolli.py --output relatorio_2024.csv --headless --verbose
-```
-
-### Gerando Executável
-
-Para gerar um executável standalone:
-```bash
-pyinstaller --onefile scraper_friolli.py
-```
-
-O executável será criado na pasta `dist/`.
-
-## Dependências
-
-- **selenium**: Automação do navegador web
-- **beautifulsoup4**: Parsing e extração de dados HTML
-- **pandas**: Manipulação e análise de dados
-- **pyinstaller**: Geração de executáveis standalone
-
-Versões específicas estão listadas no arquivo `requirements.txt`.
-
-## Estrutura do Projeto
-
-```
-friolli-transparency-scraper/
-├── README.md
-├── requirements.txt
-├── scraper_friolli.py
-└── dados_transparencia.csv (gerado após execução)
-```
-
-## Requisitos do Sistema
-
-- Python 3.7+
-- Chrome ou Firefox instalado
-- Conexão com a internet
-
-## Contribuição
-
-Contribuições são bem-vindas! Por favor:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abra um Pull Request
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-## Avisos Legais
-
-- Este scraper foi desenvolvido para acessar apenas informações públicas
-- Respeite os termos de uso do portal
-- Use com responsabilidade e ética
-- Não sobrecarregue os servidores com muitas requisições simultâneas
+- Integração com provedores de agenda (Google/Outlook) para sincronizar audiências.
+- Mecanismo de automação com templates para petições e notificações.
+- Conectores com tribunais para ingestão automática de andamentos.
+- Dashboard analítico em tempo real com indicadores financeiros e de produtividade.
