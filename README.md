@@ -46,12 +46,18 @@ python scraper_friolli.py [opções]
 python scraper_friolli.py --output relatorio_2024.csv --headless --verbose
 ```
 
-### Relatório rápido em Markdown
+### Relatório rápido em Markdown ou HTML (mobile-friendly)
 
 Gere um relatório resumido de qualquer CSV usando o utilitário `transparency_reporter.py`:
 
 ```bash
 python transparency_reporter.py dados_transparencia.csv --output relatorio.md --top 5
+```
+
+Para gerar um HTML responsivo (ideal para abrir no celular):
+
+```bash
+python transparency_reporter.py dados_transparencia.csv --format html --output relatorio.html --top 5
 ```
 
 Para exibir no terminal:
