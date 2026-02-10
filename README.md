@@ -12,6 +12,7 @@ Este projeto é uma ferramenta de web scraping desenvolvida para extrair dados d
 - Tratamento de erros e logs detalhados
 - Interface de linha de comando
 - Geração de executável standalone
+- Geração de relatórios rápidos em Markdown a partir de CSVs
 
 ## Como Usar
 
@@ -43,6 +44,26 @@ python scraper_friolli.py [opções]
 #### Exemplo de uso:
 ```bash
 python scraper_friolli.py --output relatorio_2024.csv --headless --verbose
+```
+
+### Relatório rápido em Markdown ou HTML (mobile-friendly)
+
+Gere um relatório resumido de qualquer CSV usando o utilitário `transparency_reporter.py`:
+
+```bash
+python transparency_reporter.py dados_transparencia.csv --output relatorio.md --top 5
+```
+
+Para gerar um HTML responsivo (ideal para abrir no celular):
+
+```bash
+python transparency_reporter.py dados_transparencia.csv --format html --output relatorio.html --top 5
+```
+
+Para exibir no terminal:
+
+```bash
+python transparency_reporter.py dados_transparencia.csv --top 3
 ```
 
 ### Gerando Executável
